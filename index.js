@@ -1,7 +1,7 @@
 async function sa() {
     const plex = require("./src/Base/Base")
 
-    const client = new plex.Client("OTQ3NDY3MjY5NjAzMjA1MTIx.YhtrqA.AB-Yt-qrsAdjBr7dlSM1Pr5nm3I")
+    const client = new plex.Client("tokeni çaldırdı zort EQWEQW")
     const clientEvents = plex.events
     client.start()
     clientEvents.on("ready", async() => {

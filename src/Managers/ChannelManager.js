@@ -1,5 +1,9 @@
 let acs = require("../Request/Request")
 
+String.prototype.replaceAlltest = function (search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
 
 module.exports = {
     fetch: function(id) {
@@ -11,10 +15,6 @@ module.exports = {
                 dataget1.send = function(content) {
 
                     if(typeof content === "object") {
-                        String.prototype.replaceAlltest = function (search, replacement) {
-                            var target = this;
-                            return target.split(search).join(replacement);
-                        };
                         let rgb;
                         if (content.color !== null || content.color !== undefined)  {
                             const split = content.color.replaceAlltest(" ", "").split(",")
@@ -34,6 +34,48 @@ module.exports = {
                                 ]
                           
                             }).then(dataget => {
+                                //EDIT MESSAGE
+                                dataget.edit = function(content2) {
+
+                                    if(typeof content2 === "object") {
+                                        let rgb;
+                                        if (content2.color !== null || content2.color !== undefined)  {
+                                            if(Object.keys(content2).includes("color")) {
+                                                const split = content2.color.replaceAlltest(" ", "").split(",")
+                                                rgb = ((split[0] & 0x0ff) << 16) | ((split[1] & 0x0ff) << 8) | (split[2] & 0x0ff);
+                                            }
+
+                                        }
+
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${dataget.id}`, "PATCH", {
+                                                content: content.content,
+                                                embeds: [
+                                                    {
+                                                        author: content2.author,
+                                                        title: content2.title,
+                                                        description: content2.description,
+                                                        color: rgb
+                                                    }
+                                                ]
+                                            }).then(msg => {
+                                                resolve(msg)
+                                            })
+                                        })
+
+                                    } else {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${dataget.id}`, "PATCH", {
+                                                content: content2
+                                            }).then(dataget => {
+                                                resolve(dataget)
+                                            })
+                                        })
+                                    }
+
+
+
+                                }
                                 resolve(dataget)
                             })
                         })
@@ -48,6 +90,9 @@ module.exports = {
                         })
                     }
                 }
+
+
+
 
                 //DELETE CHANNEL
 

@@ -6,19 +6,19 @@ class Embed {
     constructor() {
      
     }
-    auhtor(authorget) {
+    setAuhtor(authorget) {
         this.auhtor = authorget
         return this
     }
-    title(titleget) {
+    setTitle(titleget) {
         this.title = titleget
         return this
     }
-    description(descriptionget) {
+    setDescription(descriptionget) {
         this.description = descriptionget
         return this
     }
-    color(colorcode) {
+    setColor(colorcode) {
         this.color = colorcode
         return this
     }

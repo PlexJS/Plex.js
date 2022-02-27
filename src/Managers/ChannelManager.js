@@ -12,7 +12,7 @@ module.exports = {
 
 
                 //SEND MESSAGE TO CHANNEL
-                dataget1.send = function(content) {
+                dataget1.send = function(content, attachments) {
 
                     if(typeof content === "object") {
                         let rgb;
@@ -31,7 +31,8 @@ module.exports = {
                                         description: content.description,
                                         color: rgb
                                     }
-                                ]
+                                ],
+                                attachments: attachments
                           
                             }).then(dataget => {
                                 //EDIT MESSAGE
@@ -91,8 +92,16 @@ module.exports = {
                     }
                 }
 
-
-
+                //REPLY MESSAGE
+                dataget1.reply = function(content, attachments) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages`, "POST", {
+                            content: content,
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
 
                 //DELETE CHANNEL
 
@@ -120,6 +129,16 @@ module.exports = {
                                     })
                                 }
 
+                                
+                                dataget.edit = function(content) {
+                                    return new Promise((resolve, reject) => {
+                                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}`, "PATCH", {
+                                            content: content
+                                        }).then(dataget2 => {
+                                            resolve(dataget2)
+                                        })
+                                    })
+                                }
                                 //PIN MESSAGE
                                 dataget.pin = function() {
                                     return new Promise((resolve, reject) => {
@@ -130,7 +149,6 @@ module.exports = {
                                 }
 
                                 //UNPIN MESSAGE
-
                                 dataget.unpin = function() {
                                     return new Promise((resolve, reject) => {
                                         return acs.req(`https://discord.com/api/v9/channels/${id}/pins/${messageID}`, "DELETE").then(dataget2 => {
@@ -138,10 +156,55 @@ module.exports = {
                                         })
                                     })
                                 }
+                                dataget.unreact = function(emoji) {
+                                    return new Promise((resolve, reject) => {
+                                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/reactions/${emoji}/@me`, "DELETE").then(dataget2 => {
+                                            resolve(dataget2)
+                                        })
+                                    })
+                                }
+                                dataget.reactions = {
+                                    fetch: function(emoji) {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/reactions/${emoji}`, "GET").then(dataget2 => {
+                                                resolve(dataget2)
+                                            })
+                                        })
+                                    }
+                                }
+                                dataget.removeAttachments = function() {
+                                    return new Promise((resolve, reject) => {
+                                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/attachments`, "DELETE").then(dataget2 => {
+                                            resolve(dataget2)
+                                        })
+                                    })
+                                }
+
                                 resolve1(dataget)
                             })
                         })
                     }
+                }
+
+                //EDIT CHANNEL
+                dataget1.editChannel = function(obj) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/channels/${obj.id}`, "PATCH", {
+                            name: obj.name,
+                            type: obj.type,
+                            topic: obj.topic,
+                            position: obj.position,
+                            permission_overwrites: obj.permissionOverwrites,
+                            bitrate: obj.bitrate,
+                            user_limit: obj.userLimit,
+                            parent_id: obj.parentID,
+                            nsfw: obj.nsfw,
+                            rate_limit_per_user: obj.rateLimitPerUser,
+                            reason: obj.reason
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
                 }
                 resolve(dataget1)
             })

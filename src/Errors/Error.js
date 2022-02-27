@@ -9,7 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.PJSerror = void 0;
 class PJSerror {
     constructor(errorString) {
-    console.error("noluo he")
+    //console.error("noluo he")
+    throw new TypeError(`[PlexJS] ${errorString}`)
     }
 
 }

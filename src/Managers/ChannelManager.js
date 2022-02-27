@@ -9,13 +9,44 @@ module.exports = {
 
                 //SEND MESSAGE TO CHANNEL
                 dataget1.send = function(content) {
-                    return new Promise((resolve, reject) => {
-                    return acs.req(`https://discord.com/api/v9/channels/${id}/messages`, "POST", {
-                        content: content
-                    }).then(dataget => {
-                        resolve(dataget)
-                    })
-                })
+
+                    if(typeof content === "object") {
+                        String.prototype.replaceAlltest = function (search, replacement) {
+                            var target = this;
+                            return target.split(search).join(replacement);
+                        };
+                        let rgb;
+                        if (content.color !== null || content.color !== undefined)  {
+                            const split = content.color.replaceAlltest(" ", "").split(",")
+                            rgb = ((split[0] & 0x0ff) << 16) | ((split[1] & 0x0ff) << 8) | (split[2] & 0x0ff);
+                        }
+
+                        return new Promise((resolve, reject) => {
+                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages`, "POST", {
+                                content: content.content,
+                                embeds: [
+                                    {
+                                        author: content.author,
+                                        title: content.title,
+                                        description: content.description,
+                                        color: rgb
+                                    }
+                                ]
+                          
+                            }).then(dataget => {
+                                resolve(dataget)
+                            })
+                        })
+
+                    } else {
+                        return new Promise((resolve, reject) => {
+                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages`, "POST", {
+                                content: content
+                            }).then(dataget => {
+                                resolve(dataget)
+                            })
+                        })
+                    }
                 }
 
                 //DELETE CHANNEL
@@ -46,11 +77,6 @@ module.exports = {
                         })
                     }
                 }
-
-
-
-
-
                 resolve(dataget1)
             })
         })

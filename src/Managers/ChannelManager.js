@@ -120,56 +120,70 @@ module.exports = {
                                     })
                                 }
 
-                                //EDIT MESSAGE
-                                dataget.edit = function(content) {
-                                    return new Promise((resolve, reject) => {
-                                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}`, "PATCH", {
-                                            content: content
-                                        }).then(dataget2 => {
-                                            resolve(dataget2)
+
+                                //PIN SYSTEM
+
+                                dataget.pins = {
+                                    pin: function() {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/pins/${messageID}`, "PUT").then(dataget2 => {
+                                                resolve(dataget2)
+                                            })
                                         })
-                                    })
+                                    },
+                                    unpin: function() {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/pins/${messageID}`, "DELETE").then(dataget2 => {
+                                                resolve(dataget2)
+                                            })
+                                        })
+                                    }
                                 }
 
-                                //PIN MESSAGE
-                                dataget.pin = function() {
-                                    return new Promise((resolve, reject) => {
-                                        return acs.req(`https://discord.com/api/v9/channels/${id}/pins/${messageID}`, "PUT").then(dataget2 => {
-                                            resolve(dataget2)
-                                        })
-                                    })
-                                }
 
-                                //UNPIN MESSAGE
-                                dataget.unpin = function() {
-                                    return new Promise((resolve, reject) => {
-                                        return acs.req(`https://discord.com/api/v9/channels/${id}/pins/${messageID}`, "DELETE").then(dataget2 => {
-                                            resolve(dataget2)
+                                //ATTACHMENT SYSTEM
+                                dataget.attachments = {
+                                    //REMOVE ATTACHMENTS
+
+                                    remove: function() {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/attachments`, "DELETE").then(dataget2 => {
+                                                resolve(dataget2)
+                                            })
                                         })
-                                    })
+                                    }
                                 }
-                                dataget.unreact = function(emoji) {
-                                    return new Promise((resolve, reject) => {
-                                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/reactions/${emoji}/@me`, "DELETE").then(dataget2 => {
-                                            resolve(dataget2)
-                                        })
-                                    })
-                                }
+                                
+
+                                //REACTION SYSTEM
+
                                 dataget.reactions = {
+                                    //FETCH REACTIONS
                                     fetch: function(emoji) {
                                         return new Promise((resolve, reject) => {
                                             return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/reactions/${emoji}`, "GET").then(dataget2 => {
                                                 resolve(dataget2)
                                             })
                                         })
-                                    }
-                                }
-                                dataget.removeAttachments = function() {
-                                    return new Promise((resolve, reject) => {
-                                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/attachments`, "DELETE").then(dataget2 => {
-                                            resolve(dataget2)
+                                    },
+
+                                    //REACT
+                                    react: function(emoji) {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/reactions/${emoji}/@me`, "PUT").then(dataget2 => {
+                                                resolve(dataget2)
+                                            })
                                         })
-                                    })
+                                    },
+
+                                    //UNREACT
+                                    unreact: function(emoji) {
+                                        return new Promise((resolve, reject) => {
+                                            return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}/reactions/${emoji}/@me`, "DELETE").then(dataget2 => {
+                                                resolve(dataget2)
+                                            })
+                                        })
+                                    }
                                 }
 
                                 resolve1(dataget)

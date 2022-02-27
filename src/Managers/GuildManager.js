@@ -61,6 +61,88 @@ module.exports = {
                         })
                     })
                 }
+                dataget1.leave = function() {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/users/@me/guilds/${dataget1.id}`, "DELETE").then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.setIcon = function(icon) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}`, "PATCH", {
+                            icon: icon
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.setOwner = function(obj) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}/members/${obj.id}`, "PATCH", {
+                            access_token: obj.accessToken
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.setAFKChannel = function(obj) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}`, "PATCH", {
+                            afk_channel_id: obj.id
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.setAFKTimeout = function(obj) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}`, "PATCH", {
+                            afk_timeout: obj.timeout
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.setVerificationLevel = function(obj) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}`, "PATCH", {
+                            verification_level: obj.level
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.scheduleEvent = function(obj) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}/scheduled-events`, "POST", {
+                            ...obj
+                        }).then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.deleteScheduledEvent = function(id) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}/scheduled-events/${id}`, "DELETE").then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.getScheduledEvents = function() {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}/scheduled-events`, "GET").then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
+                dataget1.getScheduledEvent = function(id) {
+                    return new Promise((resolve, reject) => {
+                        return acs.req(`https://discord.com/api/v9/guilds/${dataget1.id}/scheduled-events/${id}`, "GET").then(dataget => {
+                            resolve(dataget)
+                        })
+                    })
+                }
                 resolve(dataget1)
             })
         })

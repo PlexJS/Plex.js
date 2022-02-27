@@ -111,7 +111,7 @@ module.exports = {
                         return new Promise((resolve1, reject) => {
                             return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}`, "GET").then(dataget => {
 
-                            //DELETE MESSAGE
+                                //DELETE MESSAGE
                                 dataget.delete = function() {
                                     return new Promise((resolve, reject) => {
                                         return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}`, "DELETE").then(dataget2 => {
@@ -120,7 +120,7 @@ module.exports = {
                                     })
                                 }
 
-                                
+                                //EDIT MESSAGE
                                 dataget.edit = function(content) {
                                     return new Promise((resolve, reject) => {
                                         return acs.req(`https://discord.com/api/v9/channels/${id}/messages/${messageID}`, "PATCH", {
@@ -130,6 +130,7 @@ module.exports = {
                                         })
                                     })
                                 }
+
                                 //PIN MESSAGE
                                 dataget.pin = function() {
                                     return new Promise((resolve, reject) => {

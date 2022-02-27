@@ -8,7 +8,7 @@ async function sa() {
         console.log("açıldı")
     })
     clientEvents.on("message", async(msg) => {
-        if(msg.author.bot) return
+        if(msg.author.bot) return msg.reply("Hello Bot ! ")
         msg.reply("merhaba")
     })
 

@@ -75,8 +75,13 @@ class Client {
                     em.emit("ready")
                     break;
                 case "MESSAGE_CREATE":
-                    d["channel"] = d.channel_id
-                    em.emit("message", d)
+                    GuildManager.fetch(d.guild_id).then(data => {
+                        d["guild"] = data
+                        ChannelManager.fetch(d.channel_id).then(data2 => {
+                            d["channel"] = data2
+                            em.emit("message", d)
+                        })
+                    })
                     break;
                 case "INTERACTION_CREATE":
                     let URL = `https://discord.com/api/v9/interactions/${d.id}/${d.token}/callback`;

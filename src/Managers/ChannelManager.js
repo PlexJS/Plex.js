@@ -92,16 +92,7 @@ module.exports = {
                     }
                 }
 
-                //REPLY MESSAGE
-                dataget1.reply = function(content, attachments) {
-                    return new Promise((resolve, reject) => {
-                        return acs.req(`https://discord.com/api/v9/channels/${id}/messages`, "POST", {
-                            content: content,
-                        }).then(dataget => {
-                            resolve(dataget)
-                        })
-                    })
-                }
+
 
                 //DELETE CHANNEL
 

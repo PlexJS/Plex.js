@@ -5,8 +5,9 @@ async function sa() {
     const clientEvents = plex.events
     client.start()
     clientEvents.on("ready", async() => {
+        console.log("açıldı")
          const get = await client.channels.fetch("877923470476996658")
-         const getMessage = await get.messages.fetch("947232272128573533")
+         const getMessage = await get.messages.fetch("946469098404073472")
          await getMessage.delete()
     })
     

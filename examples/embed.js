@@ -13,7 +13,7 @@ async function sa() {
         if(msg.author.bot) return msg.reply("Hello Bot ! ")
         let plexEmbed = plex.Embed()
         .setTitle("Plex.JS")
-        .setColor("green")
+        .setColor("78,252,3")
         .setDescription(`Plex.JS  Wonderfull ! `);
         msg.reply(plexEmbed)
     })

@@ -14,7 +14,7 @@ async function sa() {
         let plexEmbed = plex.Embed()
         .setTitle("Plex.JS")
         .setColor("green")
-        .setDescription(`Plex.JS  Wonderfull ! ");
+        .setDescription(`Plex.JS  Wonderfull ! `);
         msg.reply(plexEmbed)
     })
 

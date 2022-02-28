@@ -1,4 +1,5 @@
 exports.Embed = void 0;
+const color = require("../Json/colors.json");
 class Embed {
     constructor() {
      
@@ -16,11 +17,14 @@ class Embed {
         return this
     }
     setColor(colorcode) {
-        this.color = colorcode
+        let getColor = color.colorcode;
+        this.color = getColor
+       
         return this
     }
     setThumbnail(thumb) {
         this.thumbnail = thumb
+        
         return this
     }
     setFooter(footerr) {

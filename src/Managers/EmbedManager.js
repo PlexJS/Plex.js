@@ -3,7 +3,7 @@ class Embed {
     constructor() {
      
     }
-    setAuhtor(authorget) {
+    setAuthor(authorget) {
         this.auhtor = authorget
         return this
     }

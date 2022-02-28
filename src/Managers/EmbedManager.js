@@ -4,7 +4,7 @@ class Embed {
      
     }
     setAuthor(authorget) {
-        this.auhtor = authorget
+        this.author = authorget
         return this
     }
     setTitle(titleget) {

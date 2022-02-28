@@ -125,6 +125,11 @@ class Client {
             })
         })
     }
+    
+    getToken(){
+    let gToken = token || "Enter A Token"
+    return gToken
+    }
 
     users = UserManager
 

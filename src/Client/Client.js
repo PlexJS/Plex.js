@@ -125,7 +125,12 @@ class Client {
             })
         })
     }
-    
+    /*
+    *
+    *  Getting Token
+    *
+    *  client.getToken()
+    */
     getToken(){
     let gToken = token || "Enter A Token"
     return gToken

@@ -17,7 +17,7 @@ class Embed {
         return this
     }
     setColor(colorcode) {
-        let getColor = color.colorcode;
+        let getColor = color.colorcode || "135, 135, 135"
         this.color = getColor
        
         return this

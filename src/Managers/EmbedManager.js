@@ -19,6 +19,14 @@ class Embed {
         this.color = colorcode
         return this
     }
+    setThumbnail(thumb) {
+        this.thumbnail = thumb
+        return this
+    }
+    setFooter(footerr) {
+        this.footer = footerr
+        return this
+    }
 }
 
 exports.Embed = Embed

@@ -79,6 +79,9 @@ class Client {
                         d["guild"] = data
                         ChannelManager.fetch(d.channel_id).then(data2 => {
                             d["channel"] = data2
+                            d["reply"] = function(content) {
+                                data2.send(`<@${d.author.id}>, ` + content)
+                            }
                             em.emit("message", d)
                         })
                     })

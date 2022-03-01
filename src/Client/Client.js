@@ -138,6 +138,16 @@ class Client {
     let gToken = token || "Enter A Token"
     return gToken
     }
+   /*
+    *
+    *  Getting WebSocket Ping
+    *
+    *  client.ping()
+    */
+
+    ping(){
+    return ws.ping()
+    }
 
     users = UserManager
 
